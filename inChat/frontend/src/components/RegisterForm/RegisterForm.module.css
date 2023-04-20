@@ -1,0 +1,32 @@
+.form_title {
+    text-align: center;
+    width: 30vw;
+    background-color: white;
+    padding: 2vw 1vw;
+    border-radius: 10px 10px 10px 10px;
+    font-size: 2rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.form_style {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 30vw;
+    padding: 2vw 1vw;
+    background-color: rgb(238, 238, 238);
+    border-radius: 10px 10px 10px 10px;
+}
+
+.form_style input{
+    border: 1px solid rgb(176, 152, 152);
+    border-radius: 10px;
+    padding: 1vw 1vw;
+    outline: none;
+    margin: 5px;
+}
+
+.form_style input[type="submit"]{
+    background-color: rgb(180, 179, 179);
+}
