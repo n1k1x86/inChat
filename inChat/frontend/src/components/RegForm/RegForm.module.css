@@ -30,3 +30,10 @@
 .form_style input[type="submit"]{
     background-color: rgb(180, 179, 179);
 }
+
+.form_style p {
+    font-size: 12px;
+    text-align: left;
+    margin-left: 10px;
+    color: red;
+}
