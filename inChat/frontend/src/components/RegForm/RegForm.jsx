@@ -71,9 +71,11 @@ const RegForm = () => {
                     if (response.data.error['username'][0] == "user with this username already exists.") {
                         setErrorForm("This user already exists. Try to sign in.")
                     }
-                } else{
-                    localStorage.setItem('token', response.data.token);
-                    navigate('/chat');
+                } else {
+                    setErrorForm("Now you can sign in.")
+                    setTimeout(() => {
+                        navigate('/login');
+                    }, 1000)
                 }
             }).catch((error) => {
                 console.log(error);

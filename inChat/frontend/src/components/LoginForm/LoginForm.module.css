@@ -2,6 +2,7 @@
     text-align: center;
     width: 30vw;
     background-color: white;
+    color: black;
     padding: 2vw 1vw;
     border-radius: 10px 10px 10px 10px;
     font-size: 2rem;
@@ -29,4 +30,11 @@
 
 .form_style input[type="submit"]{
     background-color: rgb(180, 179, 179);
+}
+
+.form_style p {
+    font-size: 12px;
+    text-align: left;
+    margin-left: 10px;
+    color: red;
 }
