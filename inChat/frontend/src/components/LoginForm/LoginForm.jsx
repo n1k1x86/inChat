@@ -131,7 +131,7 @@ const LoginForm = () => {
             </div>
         );
     } else {
-        navigate('/chat', {state: {isAuthenticated: isAuthenticated, csrf: csrf}});
+        navigate('/lobby');
     }
 }
 

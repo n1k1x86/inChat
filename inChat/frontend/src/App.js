@@ -1,7 +1,8 @@
 import { Route, Routes } from 'react-router-dom';
 import LoginForm from './components/LoginForm/LoginForm';
 import RegForm from './components/RegForm/RegForm';
-import Chat from './components/Chat/Chat';
+import LobbyForm from './components/LobbyForm/LobbyForm';
+import ChatForm from './components/ChatForm/ChatForm';
 import styles from './App.module.css';
 
 
@@ -11,7 +12,8 @@ const App = () => {
         <Routes>
           <Route path="/login" element={<LoginForm />} />
           <Route path="/register" element={<RegForm />} />
-          <Route path="/chat" element={<Chat />} />
+          <Route path="/lobby" element={<LobbyForm />} />
+          <Route path='/chat' element={<ChatForm />} />
         </Routes>
     </div>
   );
