@@ -4,7 +4,6 @@ from channels.routing import ProtocolTypeRouter, URLRouter
 from django.core.asgi import get_asgi_application
 from chat.routing import websocket_urlpatterns
 from channels.auth import AuthMiddlewareStack
-from .middleware import TokenAuthMiddleware
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'api.settings')
 
