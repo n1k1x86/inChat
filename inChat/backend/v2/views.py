@@ -1,7 +1,3 @@
-import hashlib
-
-# from django.http import JsonResponse
-
 from .models import User
 
 from .serializers import RegistrationSerializer, UserLoginSerializer, UserSerializer

@@ -24,6 +24,7 @@ const ChatForm = () => {
 
     chatSocket.onclose = (e) => {
         console.log('closed...');
+        navigate('/lobby');
     }
 
     useLayoutEffect(() => {
@@ -74,6 +75,7 @@ const ChatForm = () => {
         document.getElementById('mes-field').value = '';
     }
 
+
     return (
         <div>
             <div>
@@ -87,6 +89,9 @@ const ChatForm = () => {
                     <input id="mes-field" type='text' placeholder="enter your message" onChange={(e) => handleMessage(e)}/>
                     <input type='submit' value="send"/>
                 </form>
+            </div>
+            <div>
+                <button onClick={(e) => chatSocket.close(1000, "exit")}>end chatting</button>
             </div>
         </div>
     )

@@ -11,7 +11,6 @@ const LoginForm = () => {
     const [isAuthenticated, setIsAuthenticated] = useState('');
     const [errorUsername, setErrorUsername] = useState('Username field is required');
     const [errorPassword, setErrorPassword] = useState('Password field is required');
-    const [isValidForm, setIsValidForm] = useState(false);
     
     function handleErrors(response) {
         response.json().then((detail) => {
@@ -81,9 +80,10 @@ const LoginForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        let isValidForm = false
 
         if (errorPassword === null && errorUsername === null) {
-            setIsValidForm(true);
+            isValidForm = true;
         }
 
         if (isValidForm) {
@@ -122,7 +122,7 @@ const LoginForm = () => {
                         placeholder="login" />
                     <p>{errorUsername}</p>
                     <input type="password" onChange={(e) => handlePassword(e)}
-                        placeholder="password" />
+                        placeholder="password" autoComplete="" />
                     <p>{errorPassword}</p>
                     <input type="submit"
                         value="Sign In"

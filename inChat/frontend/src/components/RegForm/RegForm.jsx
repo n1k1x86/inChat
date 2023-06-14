@@ -12,7 +12,6 @@ const RegForm = () => {
     const [errorRep, setErrorRep] = useState(null);
     const [errorUser, setErrorUser] = useState('Username field is required');
     const [errorPass, setErrorPass] = useState('Password field is required');
-    const [isValidForm, setIsValidForm] = useState(false);
     const [errorForm, setErrorForm] = useState(null);
 
     const handleUsername = (e) => {
@@ -57,9 +56,10 @@ const RegForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrorForm(null);
+        let isValidForm = false;
 
         if (errorPass === null && errorRep === null && errorUser === null) {
-            setIsValidForm(true);
+            isValidForm = true;
         }
 
         if (isValidForm) {

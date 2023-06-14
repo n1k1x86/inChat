@@ -32,6 +32,10 @@
     background-color: rgb(180, 179, 179);
 }
 
+.form_style button{
+    background-color: rgb(180, 179, 179);
+}
+
 .form_style p {
     font-size: 12px;
     text-align: left;
