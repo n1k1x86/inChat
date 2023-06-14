@@ -12,7 +12,6 @@ const RegForm = () => {
     const [errorRep, setErrorRep] = useState(null);
     const [errorUser, setErrorUser] = useState('Username field is required');
     const [errorPass, setErrorPass] = useState('Password field is required');
-    const [isValidForm, setIsValidForm] = useState(false);
     const [errorForm, setErrorForm] = useState(null);
 
     const handleUsername = (e) => {
@@ -21,7 +20,7 @@ const RegForm = () => {
         let newUsername = e.target.value;
         setUsername(newUsername);
 
-        if (newUsername === null || newUsername == '') {
+        if (newUsername === null || newUsername === '') {
             setErrorUser('Username field is required');
         } else {
             setErrorUser(null);
@@ -34,7 +33,7 @@ const RegForm = () => {
         let newPassword1 = e.target.value;
         setPassword1(newPassword1);
 
-        if (newPassword1 === null || newPassword1 == '') {
+        if (newPassword1 === null || newPassword1 === '') {
             setErrorPass('Password field is required');
         } else {
             setErrorPass(null);
@@ -57,9 +56,10 @@ const RegForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrorForm(null);
+        let isValidForm = false;
 
         if (errorPass === null && errorRep === null && errorUser === null) {
-            setIsValidForm(true);
+            isValidForm = true;
         }
 
         if (isValidForm) {
@@ -68,12 +68,14 @@ const RegForm = () => {
                 "password": password1
             }).then((response) => {
                 if (response.data.error !== undefined) {
-                    if (response.data.error['username'][0] == "user with this username already exists.") {
+                    if (response.data.error['username'][0] === "user with this username already exists.") {
                         setErrorForm("This user already exists. Try to sign in.")
                     }
-                } else{
-                    localStorage.setItem('token', response.data.token);
-                    navigate('/chat');
+                } else {
+                    setErrorForm("Now you can sign in.")
+                    setTimeout(() => {
+                        navigate('/login');
+                    }, 1000)
                 }
             }).catch((error) => {
                 console.log(error);

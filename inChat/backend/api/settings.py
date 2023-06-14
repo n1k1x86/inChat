@@ -22,15 +22,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-0zj()uzu5=^0tib^#n3=b98v_)-^mw7_a&6)^mqqfswxhs(rrd'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
+    'channels',
+    'chat.apps.ChatConfig',
     'rest_framework',
-    'rest_framework.authtoken',
     'v2.apps.V2Config',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -38,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -45,6 +48,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -70,6 +74,15 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'api.wsgi.application'
 
+ASGI_APPLICATION = "api.asgi.application"
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND":
+            "channels.layers.InMemoryChannelLayer",
+    }
+}
+
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -81,6 +94,16 @@ DATABASES = {
         'PASSWORD': '123456',
         'HOST': 'localhost',
         'PORT': '3306',
+    }
+}
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379/',
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
     }
 }
 
@@ -127,15 +150,30 @@ AUTH_USER_MODEL = 'v2.User'
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.TokenAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
     ],
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.AllowAny",
     ]
 }
 
-CORS_ORIGIN_ALLOW_ANY = False
+CSRF_COOKIE_SAMESITE = 'Lax'
+SESSION_COOKIE_SAMESITE = 'Lax'
+CSRF_COOKIE_HTTPONLY = True
+SESSION_COOKIE_HTTPONLY = True
 
-CORS_ORIGIN_WHITELIST = [
-    "http://localhost:3000"
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
 ]
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
+]
+CORS_EXPOSE_HEADERS = ['Content-Type', 'X-CSRFToken']
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_HEADERS = ('content-disposition', 'accept-encoding',
+                      'content-type', 'accept', 'origin', 'Authorization',
+                      'access-control-allow-methods', 'access-control-allow-origin', 'access-control-allow-headers',
+                      'x-csrftoken')
